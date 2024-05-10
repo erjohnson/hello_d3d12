@@ -1,0 +1,10 @@
+.vs/
+.vscode/
+.DS_Store
+build/
+_build/
+
+*.exe
+*.ilk
+*.pdb
+*.obj
