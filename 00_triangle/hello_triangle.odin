@@ -4,7 +4,7 @@
 // - https://gist.github.com/karl-zylinski/e1d1d0925ac5db0f12e4837435c5bbfb
 // - https://gist.github.com/jakubtomsu/ecd83e61976d974c7730f9d7ad3e1fd0
 
-package hello_d3d12
+package hello_triangle
 
 import "core:fmt"
 import "core:log"
@@ -16,7 +16,7 @@ import d3d12 "vendor:directx/d3d12"
 import dxgi "vendor:directx/dxgi"
 import d3dc "vendor:directx/d3d_compiler"
 
-import "jo/app"
+import "../jo/app"
 
 NUM_RENDERTARGETS :: 2
 
@@ -25,7 +25,7 @@ main :: proc() {
 
 	context.logger = log.create_console_logger(.Debug, {.Terminal_Color, .Level})
 
-	app.init(title = "Hello Direct3D 12", fullscreen = .Off)
+	app.init(title = "Hello D3D12 Triangle!", fullscreen = .Off)
 
 	// Grab native window handle
 	native_window := dxgi.HWND(app.window())
@@ -39,7 +39,7 @@ main :: proc() {
 		flags: dxgi.CREATE_FACTORY
 
 		when ODIN_DEBUG {
-			flags |= dxgi.CREATE_FACTORY_DEBUG
+			flags |= dxgi.CREATE_FACTORY{dxgi.CREATE_FACTORY_FLAG.DEBUG}
 		}
 
 		hr = dxgi.CreateDXGIFactory2(flags, dxgi.IFactory4_UUID, cast(^rawptr)&factory)
